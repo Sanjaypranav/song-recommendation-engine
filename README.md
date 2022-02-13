@@ -1,19 +1,23 @@
 # Spotify Regional Song Recommendation
 
 # Problem Statement 
-
-
+To Recommend user choice based on his mood  songs from Spotify data.
 
 
 # Dataset description
-
+Regional Spotify songs (Tamil) with features. Data has been collected using Spotipy API 
  
 
 # Algorithm used   
 
+
+    Cosine Similarity 
+
+    
+
 # App deployment  
  
-
+FLASK APP
 
 # To run this Project locally
 
@@ -53,8 +57,8 @@ python app.py
 
 # Input console 
 
-![toxicity](Capture1.PNG)
+![toxicity](screenshots/Capture1.png)
 
 # Output console 
-![toxicity](Capture2.PNG)
+![toxicity](screenshots/Capture2.png)
 
