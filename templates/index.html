@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>song recommendation engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/styles/normalize.css"
+    />
+    <link rel="stylesheet" href="/static/styles/index.css" />
+    <link rel="icon" href="/static/img/spotify.png" />
+  </head>
+  <!-- <style>
+    .recommended-songs div{
+      display: {{property}};
+    }
+  </style> -->
+
+  <body>
+    <header>
+      <nav class="navigation-menu">
+        <ul>
+          <li><img src="/static/img/spotify.png" alt="" /></li>
+          <li>Song Recommendation Engine</li>
+        </ul>
+      </nav>
+    </header>
+    <!-- <div class="recent">
+      <p>{{Recently}}</p>
+    </div> -->
+    <main>
+      <section>
+        <div class="main-container">
+          <form action="{{ url_for('predict')}}" method="POST">
+            <input name="track_name" placeholder="song name..."></input>
+            <button type="submit" class="recommend-btn">Recommend Songs</button>
+            </button>
+          </form>
+        </div>
+      </section>
+      <section>
+        <div class="recommended-songs">
+          <div id="recommended-songs-content">
+            <ul>
+            {%for song in prediction%}
+              <li>{{song}}</li>
+              <!-- <button class="Listen">Listen</button> -->
+              <br>
+            {%endfor%}
+            </ul>
+           </div>
+        </div>
+      </section>
+    </main>
+    <!-- <aside>
+      <div class="top-tracks-container">
+
+      </div>
+    </aside> -->
+  </body>
+</html>
