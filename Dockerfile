@@ -1,10 +1,9 @@
 FROM python
-# MAINTAINER Sanjaypranav <sanjaypriya195@gmail.com>
-#recommendation is name of the image
-COPY requirements.txt /tmp/requirements.txt
-WORKDIR /tmp
-
+WORKDIR /code
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-COPY . /tmp/
-RUN python3 app.py
-
+EXPOSE 5000
+COPY . .
+CMD ["flask", "run"]
