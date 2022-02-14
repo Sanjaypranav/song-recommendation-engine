@@ -47,13 +47,11 @@
       <section>
         <div class="recommended-songs">
           <div id="recommended-songs-content">
-            <ul>
-            {%for song in prediction%}
-              <li>{{song}}</li>
-              <!-- <button class="Listen">Listen</button> -->
+            {%for i in num%}
+              <a href="{{uris[i]}}">{{prediction[i]}}</a>
+              <br>
               <br>
             {%endfor%}
-            </ul>
            </div>
         </div>
       </section>
@@ -63,5 +61,8 @@
 
       </div>
     </aside> -->
+    <footer>
+
+    </footer>
   </body>
 </html>

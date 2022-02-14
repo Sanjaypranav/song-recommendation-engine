@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify, render_template
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import pandas as pd
-import os
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 import numpy as np
@@ -39,21 +38,24 @@ def get_cosim_artist_df(track_name, data, n):
 def index():
     sp = authorize_spotify()
     result = sp.current_user_recently_played(limit = 1)
-    print(result['items'][0]['track']['name'])
+    # print(result['items'][0]['track']['name'])
     return render_template('index.html')
 
 @app.route('/predict',methods = ['GET','POST'])
 def predict():
     if request.method == 'POST':
+        uri = []
+        sp = authorize_spotify()
         data = pd.read_csv('src/data/scaled_spotify_tamil.csv')
         data.index = data['track_name']
         data.drop_duplicates(subset = "track_name", keep="first", inplace=True)
         data.drop('track_name',1,inplace=True)
         song = request.form['track_name']
-        print("<============= Track Name =================> :",song)
-        recommended_songs = get_cosim_artist_df(song, data, 10)
-        print("Recommended songs =================> :",recommended_songs)
-    return render_template('index.html',prediction=recommended_songs['Song name'].values)
+        recommended_songs = get_cosim_artist_df(song, data, 15)
+        for song in recommended_songs['Song name'].values:
+            result = sp.search(q=song, type='track')
+            uri.append(result['tracks']['items'][0]['uri'])
+    return render_template('index.html',prediction=recommended_songs['Song name'].values,uris = uri,num = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])
 
 
 def authorize_spotify():
@@ -73,4 +75,4 @@ def authorize_spotify():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port = 8000)
+    app.run(debug=True)
